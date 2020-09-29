@@ -1,10 +1,6 @@
-API/obj/
-API/bin/
-Application/bin/
-Application/obj/
-Domain/bin/
-Domain/obj/
-Persistence/bin/
-Persistence/obj/
+obj
+bin
+.DS_Store
+appsetings.json
 .vscode
-API/reactivites.db
+*.db
