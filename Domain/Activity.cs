@@ -1,7 +1,9 @@
 using System;
 
-namespace Domain {
-  public class Activity {
+namespace Domain
+{
+  public class Activity
+  {
     public Guid ID { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
