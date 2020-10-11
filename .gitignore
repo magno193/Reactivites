@@ -3,4 +3,5 @@ bin
 .DS_Store
 appsetings.json
 .vscode
+.vs
 *.db
