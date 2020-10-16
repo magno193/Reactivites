@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { IActivity } from '../../../app/models/activity';
 
@@ -9,7 +9,7 @@ interface IProps {
 
 export const ActivityList: React.FC<IProps> = ({
   activities,
-  selectActivity
+  selectActivity,
 }) => {
   return (
     <Segment clearing>
@@ -21,7 +21,9 @@ export const ActivityList: React.FC<IProps> = ({
               <Item.Meta>{activity.date}</Item.Meta>
               <Item.Description>
                 <div>{activity.description}</div>
-                <div>{activity.city}, {activity.venue}</div>
+                <div>
+                  {activity.city},{activity.venue}
+                </div>
               </Item.Description>
               <Item.Extra>
                 <Button
