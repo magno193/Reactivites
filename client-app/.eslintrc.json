@@ -51,7 +51,8 @@
     "@typescript-eslint/no-use-before-define": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "warn",
-    "react/prop-types": "warn"
+    "react/prop-types": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "settings": {
     "import/resolver": {
