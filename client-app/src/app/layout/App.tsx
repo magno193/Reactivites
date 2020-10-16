@@ -7,20 +7,22 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 
 const App: React.FC = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(
+    null,
+  );
+  const [editMode, setEditMode] = useState(false);
 
   const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities
-      .filter(activity => activity.id === id)[0]);
-  }
+    setSelectedActivity(activities.filter(activity => activity.id === id)[0]);
+  };
 
   useEffect(() => {
     axios
       .get<IActivity[]>('http://localhost:5000/api/activities')
       .then(response => {
         setActivities(response.data);
-      })
-  }, [])
+      });
+  }, []);
 
   return (
     <>
@@ -30,6 +32,8 @@ const App: React.FC = () => {
           activities={activities}
           selectActivity={handleSelectActivity}
           activity={selectedActivity}
+          editMode={editMode}
+          setEditMode={setEditMode}
         />
       </Container>
     </>
