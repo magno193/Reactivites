@@ -1,15 +1,20 @@
-import React, { ChangeEvent, TextareaHTMLAttributes, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
+import { v4 as uuid } from 'uuid';
 import { IActivity } from '../../../app/models/activity';
 
 interface IProps {
   setEditMode: (editMode: boolean) => void;
   activity: IActivity;
+  createActivity: (activity: IActivity) => void;
+  editActivity: (activity: IActivity) => void;
 }
 
 export const ActivityForm: React.FC<IProps> = ({
   setEditMode,
   activity: initalFormState,
+  createActivity,
+  editActivity,
 }) => {
   const initializeForm = () => {
     if (initalFormState) {
@@ -28,7 +33,15 @@ export const ActivityForm: React.FC<IProps> = ({
   const [activity, setActivity] = useState<IActivity>(initializeForm);
 
   const handleSubmit = () => {
-    console.log(activity);
+    if (initalFormState) {
+      editActivity(activity);
+    } else {
+      const newActivity = {
+        ...activity,
+        id: uuid(),
+      };
+      createActivity(newActivity);
+    }
   };
 
   const handleInputChange = (
