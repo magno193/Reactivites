@@ -52,7 +52,10 @@
     "no-use-before-define": "off",
     "prettier/prettier": "warn",
     "react/prop-types": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "prefer-destructuring": "warn",
+    "no-param-reassign": "warn",
+    "no-shadow":"warn"
   },
   "settings": {
     "import/resolver": {

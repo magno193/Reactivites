@@ -14,6 +14,7 @@ const App: React.FC = () => {
 
   const handleSelectActivity = (id: string) => {
     setSelectedActivity(activities.filter(activity => activity.id === id)[0]);
+    setEditMode(false);
   };
 
   const handleOpenCreateForm = () => {
@@ -40,7 +41,12 @@ const App: React.FC = () => {
     axios
       .get<IActivity[]>('http://localhost:5000/api/activities')
       .then(response => {
-        setActivities(response.data);
+        const activities: IActivity[] = [];
+        response.data.forEach(activity => {
+          activity.date = activity.date.split('.')[0];
+          activities.push(activity);
+        });
+        setActivities(activities);
       });
   }, []);
 
