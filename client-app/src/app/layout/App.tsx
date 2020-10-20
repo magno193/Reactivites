@@ -23,22 +23,28 @@ const App: React.FC = () => {
   };
 
   const handleCreateActivity = (activity: IActivity) => {
-    setActivities([...activities, activity]);
-    setSelectedActivity(activity);
-    setEditMode(false);
+    agent.Activities.create(activity).then(() => {
+      setActivities([...activities, activity]);
+      setSelectedActivity(activity);
+      setEditMode(false);
+    });
   };
 
   const handleEditActivity = (activity: IActivity) => {
-    setActivities([
-      ...activities.filter(activ => activ.id !== activity.id),
-      activity,
-    ]);
-    setSelectedActivity(activity);
-    setEditMode(false);
+    agent.Activities.update(activity).then(() => {
+      setActivities([
+        ...activities.filter(activ => activ.id !== activity.id),
+        activity,
+      ]);
+      setSelectedActivity(activity);
+      setEditMode(false);
+    });
   };
 
   const handleDeleteActivity = (id: string) => {
-    setActivities([...activities.filter(activity => activity.id !== id)]);
+    agent.Activities.delete(id).then(() => {
+      setActivities([...activities.filter(activity => activity.id !== id)]);
+    });
   };
 
   useEffect(() => {
