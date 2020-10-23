@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import React, { SyntheticEvent } from 'react';
 
 import { Grid } from 'semantic-ui-react';
 import { IActivity } from '../../../app/models/activity';
 import ActivityDetails from '../details/ActivityDetails';
 import { ActivityForm } from '../form/ActivityForm';
-import { ActivityList } from './ActivityList';
+import ActivityList from './ActivityList';
 
 interface IProps {
   activities: IActivity[];
@@ -70,4 +71,4 @@ const ActivityDashboard: React.FC<IProps> = ({
   );
 };
 
-export default ActivityDashboard;
+export default observer(ActivityDashboard);

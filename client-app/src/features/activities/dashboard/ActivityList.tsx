@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React, { SyntheticEvent } from 'react';
 
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
@@ -14,7 +15,7 @@ interface IProps {
   submitting: boolean;
 }
 
-export const ActivityList: React.FC<IProps> = ({
+const ActivityList: React.FC<IProps> = ({
   activities,
   selectActivity,
   deleteActivity,
@@ -59,3 +60,5 @@ export const ActivityList: React.FC<IProps> = ({
     </Segment>
   );
 };
+
+export default observer(ActivityList);

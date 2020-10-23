@@ -55,7 +55,8 @@
     "react/jsx-one-expression-per-line": "off",
     "prefer-destructuring": "warn",
     "no-param-reassign": "warn",
-    "no-shadow":"warn"
+    "no-shadow":"warn",
+    "no-return-assign": "warn"
   },
   "settings": {
     "import/resolver": {
