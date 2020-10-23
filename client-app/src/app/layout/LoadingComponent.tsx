@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
