@@ -15,14 +15,8 @@ const App: React.FC = () => {
     null,
   );
   const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [target, setTarget] = useState('');
-
-  const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities.filter(activity => activity.id === id)[0]);
-    setEditMode(false);
-  };
 
   const handleOpenCreateForm = () => {
     setSelectedActivity(null);
@@ -80,9 +74,6 @@ const App: React.FC = () => {
       <Container style={{ marginTop: '7em' }}>
         <ActivityDashboard
           activities={activityStore.activities}
-          selectActivity={handleSelectActivity}
-          activity={selectedActivity}
-          editMode={editMode}
           setEditMode={setEditMode}
           setSelectedActivity={setSelectedActivity}
           createActivity={handleCreateActivity}

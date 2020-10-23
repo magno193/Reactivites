@@ -1,17 +1,16 @@
 import { observer } from 'mobx-react-lite';
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useContext } from 'react';
 
 import { Grid } from 'semantic-ui-react';
 import { IActivity } from '../../../app/models/activity';
 import ActivityDetails from '../details/ActivityDetails';
 import { ActivityForm } from '../form/ActivityForm';
 import ActivityList from './ActivityList';
+import ActivityStore from '../../../app/stores/activityStore';
 
 interface IProps {
   activities: IActivity[];
-  selectActivity: (id: string) => void;
-  activity: IActivity | null;
-  editMode: boolean;
+
   setEditMode: (editMode: boolean) => void;
   setSelectedActivity: (activity: IActivity | null) => void;
   createActivity: (activity: IActivity) => void;
@@ -25,10 +24,6 @@ interface IProps {
 }
 
 const ActivityDashboard: React.FC<IProps> = ({
-  activities,
-  selectActivity,
-  activity,
-  editMode,
   setEditMode,
   setSelectedActivity,
   createActivity,
@@ -37,30 +32,28 @@ const ActivityDashboard: React.FC<IProps> = ({
   submitting,
   target,
 }) => {
+  const { editMode, selectedActivity } = useContext(ActivityStore);
   return (
     <Grid>
       <Grid.Column width={10}>
         <ActivityList
-          activities={activities}
-          selectActivity={selectActivity}
           deleteActivity={deleteActivity}
           submitting={submitting}
           target={target}
         />
       </Grid.Column>
       <Grid.Column width={6}>
-        {activity && !editMode && (
+        {selectedActivity && !editMode && (
           <ActivityDetails
-            activity={activity}
             setEditMode={setEditMode}
             setSelectedActivity={setSelectedActivity}
           />
         )}
         {editMode && (
           <ActivityForm
-            key={(activity && activity.id) || 0}
+            key={(selectedActivity && selectedActivity.id) || 0}
             setEditMode={setEditMode}
-            activity={activity!}
+            activity={selectedActivity!}
             createActivity={createActivity}
             editActivity={editActivity}
             submitting={submitting}
