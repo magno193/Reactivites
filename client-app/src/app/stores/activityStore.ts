@@ -1,5 +1,5 @@
 import { observable, action, makeObservable, computed } from 'mobx';
-import { createContext } from 'react';
+import { createContext, SyntheticEvent } from 'react';
 import agent from '../api/agent';
 import { IActivity } from '../models/activity';
 
@@ -14,6 +14,7 @@ class ActivityStore {
   @observable loadingInitial = false;
   @observable editMode = false;
   @observable submitting = false;
+  @observable target = '';
 
   @computed get activitiesByDate() {
     return Array.from(this.activityRegistry.values()).sort(
@@ -56,6 +57,22 @@ class ActivityStore {
       this.activityRegistry.set(activity.id, activity);
       this.selectedActivity = activity;
       this.editMode = false;
+      this.submitting = false;
+    } catch (error) {
+      this.submitting = false;
+      console.debug(error);
+    }
+  };
+
+  @action deleteActivity = async (
+    event: SyntheticEvent<HTMLButtonElement>,
+    id: string,
+  ) => {
+    this.submitting = true;
+    this.target = event.currentTarget.name;
+    try {
+      await agent.Activities.delete(id);
+      this.activityRegistry.delete(id);
       this.submitting = false;
     } catch (error) {
       this.submitting = false;
