@@ -18,11 +18,11 @@ const ActivityList: React.FC<IProps> = ({
   submitting,
   target,
 }) => {
-  const { selectActivity, activities } = useContext(ActivityStore);
+  const { selectActivity, activitiesByDate } = useContext(ActivityStore);
   return (
     <Segment clearing>
       <Item.Group divided>
-        {activities.map(activity => (
+        {activitiesByDate.map(activity => (
           <Item key={activity.id}>
             <Item.Content>
               <Item.Header as="a">{activity.title}</Item.Header>
