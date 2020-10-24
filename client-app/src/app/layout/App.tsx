@@ -18,22 +18,6 @@ const App: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [target, setTarget] = useState('');
 
-  const handleOpenCreateForm = () => {
-    setSelectedActivity(null);
-    setEditMode(true);
-  };
-
-  const handleCreateActivity = (activity: IActivity) => {
-    setSubmitting(true);
-    agent.Activities.create(activity)
-      .then(() => {
-        setActivities([...activities, activity]);
-        setSelectedActivity(activity);
-        setEditMode(false);
-      })
-      .then(() => setSubmitting(false));
-  };
-
   const handleEditActivity = (activity: IActivity) => {
     setSubmitting(true);
     agent.Activities.update(activity)
@@ -70,13 +54,12 @@ const App: React.FC = () => {
 
   return (
     <>
-      <NavBar openCreateForm={handleOpenCreateForm} />
+      <NavBar />
       <Container style={{ marginTop: '7em' }}>
         <ActivityDashboard
           activities={activityStore.activities}
           setEditMode={setEditMode}
           setSelectedActivity={setSelectedActivity}
-          createActivity={handleCreateActivity}
           editActivity={handleEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}

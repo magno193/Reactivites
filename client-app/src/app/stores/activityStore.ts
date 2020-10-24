@@ -8,6 +8,7 @@ class ActivityStore {
   @observable selectedActivity: IActivity | undefined;
   @observable loadingInitial = false;
   @observable editMode = false;
+  @observable submitting = false;
 
   constructor() {
     makeObservable(this);
@@ -26,6 +27,24 @@ class ActivityStore {
       console.debug(error);
       this.loadingInitial = false;
     }
+  };
+
+  @action createActivity = async (activity: IActivity) => {
+    this.submitting = true;
+    try {
+      await agent.Activities.create(activity);
+      this.activities.push(activity);
+      this.editMode = false;
+      this.submitting = false;
+    } catch (error) {
+      this.submitting = false;
+      console.debug(error);
+    }
+  };
+
+  @action openCreateForm = () => {
+    this.editMode = true;
+    this.selectedActivity = undefined;
   };
 
   @action selectActivity = (id: string) => {
