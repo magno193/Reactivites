@@ -11,26 +11,9 @@ import ActivityStore from '../stores/activityStore';
 const App: React.FC = () => {
   const activityStore = useContext(ActivityStore);
   const [activities, setActivities] = useState<IActivity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(
-    null,
-  );
-  const [editMode, setEditMode] = useState(false);
+
   const [submitting, setSubmitting] = useState(false);
   const [target, setTarget] = useState('');
-
-  const handleEditActivity = (activity: IActivity) => {
-    setSubmitting(true);
-    agent.Activities.update(activity)
-      .then(() => {
-        setActivities([
-          ...activities.filter(activ => activ.id !== activity.id),
-          activity,
-        ]);
-        setSelectedActivity(activity);
-        setEditMode(false);
-      })
-      .then(() => setSubmitting(false));
-  };
 
   const handleDeleteActivity = (
     event: SyntheticEvent<HTMLButtonElement>,
@@ -58,9 +41,6 @@ const App: React.FC = () => {
       <Container style={{ marginTop: '7em' }}>
         <ActivityDashboard
           activities={activityStore.activities}
-          setEditMode={setEditMode}
-          setSelectedActivity={setSelectedActivity}
-          editActivity={handleEditActivity}
           deleteActivity={handleDeleteActivity}
           submitting={submitting}
           target={target}
