@@ -4,11 +4,9 @@ import { Card, Image, Button } from 'semantic-ui-react';
 import ActivityStore from '../../../app/stores/activityStore';
 
 const ActivityDetails: React.FC = () => {
-  const {
-    selectedActivity: activity,
-    openEditForm,
-    cancelSelectedActivity,
-  } = useContext(ActivityStore);
+  const { activity, openEditForm, cancelSelectedActivity } = useContext(
+    ActivityStore,
+  );
   return (
     <Card fluid>
       <Image

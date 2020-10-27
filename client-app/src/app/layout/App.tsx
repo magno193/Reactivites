@@ -8,6 +8,7 @@ import HomePage from '../../features/home/HomePage';
 import LoadingComponent from './LoadingComponent';
 import ActivityStore from '../stores/activityStore';
 import ActivityForm from '../../features/activities/form/ActivityForm';
+import ActivityDetails from '../../features/activities/details/ActivityDetails';
 
 const App: React.FC = () => {
   const activityStore = useContext(ActivityStore);
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       <Container style={{ marginTop: '7em' }}>
         <Route path="/" exact component={HomePage} />
         <Route path="/activities" component={ActivityDashboard} />
+        <Route path="/activities/:id" component={ActivityDetails} />
         <Route path="/createActivity" component={ActivityForm} />
       </Container>
     </>
