@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import { v4 as uuid } from 'uuid';
@@ -8,9 +9,7 @@ interface IProps {
   activity: IActivity;
 }
 
-export const ActivityForm: React.FC<IProps> = ({
-  activity: initalFormState,
-}) => {
+const ActivityForm: React.FC<IProps> = ({ activity: initalFormState }) => {
   const {
     createActivity,
     editActivity,
@@ -109,3 +108,5 @@ export const ActivityForm: React.FC<IProps> = ({
     </Segment>
   );
 };
+
+export default observer(ActivityForm);
