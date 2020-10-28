@@ -1,39 +1,48 @@
 import { observer } from 'mobx-react-lite';
-import React, { ChangeEvent, useContext, useState } from 'react';
+import { loadavg } from 'os';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { Button, Form, Segment } from 'semantic-ui-react';
 import { v4 as uuid } from 'uuid';
 import { IActivity } from '../../../app/models/activity';
 import ActivityStore from '../../../app/stores/activityStore';
 
-interface IProps {
-  activity: IActivity;
+interface DetailParams {
+  id: string;
 }
 
-const ActivityForm: React.FC<IProps> = ({ activity: initalFormState }) => {
+const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
+  match,
+}) => {
   const {
     createActivity,
     editActivity,
     submitting,
     cancelFormOpen,
+    activity: initialFormState,
+    loadActivity,
   } = useContext(ActivityStore);
-  const initializeForm = () => {
-    if (initalFormState) {
-      return initalFormState;
+
+  useEffect(() => {
+    if (match.params.id) {
+      loadActivity(match.params.id).then(
+        () => initialFormState && setActivity(initialFormState),
+      );
     }
-    return {
-      id: '',
-      title: '',
-      description: '',
-      category: '',
-      date: '',
-      city: '',
-      venue: '',
-    };
-  };
-  const [activity, setActivity] = useState<IActivity>(initializeForm);
+  }, [initialFormState, loadActivity, match.params.id]);
+
+  const [activity, setActivity] = useState<IActivity>({
+    id: '',
+    title: '',
+    description: '',
+    category: '',
+    date: '',
+    city: '',
+    venue: '',
+  });
 
   const handleSubmit = () => {
-    if (initalFormState) {
+    if (initialFormState) {
       editActivity(activity);
     } else {
       const newActivity = {
