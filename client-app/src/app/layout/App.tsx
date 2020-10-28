@@ -26,7 +26,7 @@ const App: React.FC = () => {
       <Container style={{ marginTop: '7em' }}>
         <Route path="/" exact component={HomePage} />
         <Route path="/activities" component={ActivityDashboard} />
-        <Route path="/activities/:id" component={ActivityDetails} />
+        <Route path="/activities/:id" exact component={ActivityDetails} />
         <Route path="/createActivity" component={ActivityForm} />
       </Container>
     </>
