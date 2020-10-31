@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite';
-import { loadavg } from 'os';
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Button, Form, Segment } from 'semantic-ui-react';
@@ -21,6 +20,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     cancelFormOpen,
     activity: initialFormState,
     loadActivity,
+    clearActivity,
   } = useContext(ActivityStore);
 
   useEffect(() => {
@@ -29,7 +29,10 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
         () => initialFormState && setActivity(initialFormState),
       );
     }
-  }, [initialFormState, loadActivity, match.params.id]);
+    return () => {
+      clearActivity();
+    };
+  }, [initialFormState, loadActivity, match.params.id, clearActivity]);
 
   const [activity, setActivity] = useState<IActivity>({
     id: '',

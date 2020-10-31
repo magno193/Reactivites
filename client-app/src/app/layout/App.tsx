@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Container } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
-import { Route } from 'react-router-dom';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
 import NavBar from '../../features/nav/NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import HomePage from '../../features/home/HomePage';
@@ -10,7 +10,7 @@ import ActivityStore from '../stores/activityStore';
 import ActivityForm from '../../features/activities/form/ActivityForm';
 import ActivityDetails from '../../features/activities/details/ActivityDetails';
 
-const App: React.FC = () => {
+const App: React.FC<RouteComponentProps> = ({ location }) => {
   const activityStore = useContext(ActivityStore);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const App: React.FC = () => {
         <Route path="/activities" exact component={ActivityDashboard} />
         <Route path="/activities/:id" component={ActivityDetails} />
         <Route
+          key={location.key}
           path={['/createActivity', '/manage/:id']}
           component={ActivityForm}
         />
@@ -36,4 +37,4 @@ const App: React.FC = () => {
   );
 };
 
-export default observer(App);
+export default withRouter(observer(App));
