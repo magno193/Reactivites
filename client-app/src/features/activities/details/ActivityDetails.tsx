@@ -13,13 +13,7 @@ const ActivityDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const {
-    activity,
-    openEditForm,
-    cancelSelectedActivity,
-    loadActivity,
-    loadingInitial,
-  } = useContext(ActivityStore);
+  const { activity, loadActivity, loadingInitial } = useContext(ActivityStore);
 
   useEffect(() => {
     loadActivity(match.params.id);

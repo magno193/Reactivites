@@ -6,13 +6,9 @@ import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import ActivityStore from '../../../app/stores/activityStore';
 
 const ActivityList: React.FC = () => {
-  const {
-    selectActivity,
-    activitiesByDate,
-    deleteActivity,
-    submitting,
-    target,
-  } = useContext(ActivityStore);
+  const { activitiesByDate, deleteActivity, submitting, target } = useContext(
+    ActivityStore,
+  );
   return (
     <Segment clearing>
       <Item.Group divided>

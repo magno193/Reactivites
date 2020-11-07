@@ -2,10 +2,8 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button, Container, Menu } from 'semantic-ui-react';
-// import ActivityStore from '../../app/stores/activityStore';
 
 const NavBar: React.FC = () => {
-  // const { openCreateForm } = useContext(ActivityStore);
   return (
     <Menu fixed="top" inverted>
       <Container>
